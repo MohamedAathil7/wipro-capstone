@@ -1,0 +1,29 @@
+<div class="register-wrapper d-flex align-items-center justify-content-center min-vh-100">
+  <div class="card shadow-lg p-4 register-card text-center">
+    <h3 class="fw-bold text-primary mb-3">Employee Registration</h3>
+    <p class="text-muted small mb-4">Create your account</p>
+
+    <form class="d-grid gap-3">
+      <div>
+        <label for="username" class="form-label fw-semibold small">Username</label>
+        <input [(ngModel)]="username" id="username" name="username" class="form-control shadow-sm" placeholder="Enter username">
+      </div>
+      <div>
+        <label for="password" class="form-label fw-semibold small">Password</label>
+        <input [(ngModel)]="password" type="password" id="password" name="password" class="form-control shadow-sm" placeholder="Enter password">
+      </div>
+
+      <button type="button" class="btn btn-primary fw-bold shadow hover-scale" (click)="register()">
+        <i class="bi bi-person-plus me-1"></i> Register
+      </button>
+    </form>
+
+    <p *ngIf="error" class="text-danger mt-2 small">{{error}}</p>
+    <p *ngIf="success" class="text-success mt-2 small">{{success}}</p>
+
+    <p class="mt-3 small text-muted">
+      Already have an account? 
+      <a routerLink="/login" class="text-primary fw-semibold text-decoration-none">Login here</a>
+    </p>
+  </div>
+</div>

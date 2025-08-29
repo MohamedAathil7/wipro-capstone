@@ -1,0 +1,235 @@
+/* Navbar */
+.navbar {
+    background-color: transparent;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+
+}
+.navbar .navbar-brand {
+  font-size: 1.4rem;
+  letter-spacing: 1.2px;
+  color: #f1c40f;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.navbar .nav-link,
+.navbar .btn.nav-link {
+  color: #f1c40f !important;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.navbar .nav-link:hover,
+.navbar .btn.nav-link:hover {
+  background: rgba(241, 196, 15, 0.15);
+  transform: translateY(-2px);
+  color: #fff !important;
+}
+.navbar-text strong {
+  color: #f1c40f;
+}
+
+/* Dashboard Card */
+.dashboard-card {
+      background-color: transparent;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #f1c40f;
+}
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(241, 196, 15, 0.3);
+}
+
+/* Dashboard Buttons */
+.dash-btn {
+  min-width: 200px;
+  border-radius: 15px;
+  padding: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(241, 196, 15, 0.15);
+  transition: all 0.3s ease;
+  color: #222;
+  background-color: #f1c40f;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.dash-btn i {
+  font-size: 1.4rem;
+}
+.dash-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(212, 172, 13, 0.4);
+  background-color: #d4ac0d;
+  color: #222;
+}
+
+/* Balance Cards */
+.balance-card {
+  padding: 2rem;
+  border-radius: 18px;
+  text-align: center;
+  font-weight: bold;
+  color: #222;
+  box-shadow: 0 6px 16px rgba(241, 196, 15, 0.3);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f1c40f, #d4ac0d);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.balance-card h4 {
+  font-size: 2.2rem;
+}
+.balance-card p {
+  margin-top: 8px;
+  opacity: 0.9;
+  color: #332f0d;
+}
+.balance-card::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -30%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+}
+.balance-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(241, 196, 15, 0.5);
+}
+
+/* Fade Animation */
+.animate-fade {
+  animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Toast */
+.toast {
+  transition: all 0.5s ease-in-out;
+  transform: translateY(-20px);
+  opacity: 0;
+  color: #f1c40f;
+}
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Input and button colors for views */
+.card {
+      background-color: transparent;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+  color: #f1c40f !important;
+  border-radius: 16px;
+  padding: 30px 40px;
+  margin-bottom: 2.5rem;
+  border: none;
+}
+
+h3.text-primary,
+h3.text-info,
+h3.text-warning {
+  color: #f1c40f !important;
+}
+
+.btn-primary {
+  background-color: #f1c40f !important;
+  border: none;
+  color: #222;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: #d4ac0d !important;
+  color: #222;
+}
+
+.btn-info {
+  background-color: #b39507 !important;
+  border: none;
+  color: #222;
+}
+.btn-info:hover {
+  background-color: #d4ac0d !important;
+  color: #222;
+}
+
+.btn-warning {
+  background-color: #f1c40f !important;
+  border: none;
+  color: #222;
+}
+.btn-warning:hover {
+  background-color: #d4ac0d !important;
+  color: #222;
+}
+
+.btn-success {
+  background-color: #f1c40f !important;
+  border: none;
+  color: #222;
+  transition: background-color 0.3s ease;
+}
+.btn-success:hover {
+  background-color: #d4ac0d !important;
+  color: #222;
+}
+
+.btn-danger {
+  background-color: #b33a3a !important;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+.btn-danger:hover {
+  background-color: #912a2a !important;
+}
+
+/* Table Styling */
+.table-dark {
+  background-color: #444 !important;
+  color: #f1c40f !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(241, 196, 15, 0.15) !important;
+  color: #fff !important;
+}
+
+.table {
+  color: #f1c40f !important;
+}
+
+/* Badge colors overrides */
+.badge.bg-warning {
+  background-color: #f1c40f !important;
+  color: #222 !important;
+}
+
+.badge.bg-success {
+  background-color: #f1c40f !important;
+  color: #222 !important;
+}
+
+.badge.bg-danger {
+  background-color: #a32929 !important;
+  color: #fff !important;
+}

@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+  lms-employee:
+    build:
+      context: ./leave-backend/employee_service
+      dockerfile: Dockerfile
+    container_name: lms-employee
+    restart: unless-stopped
+    ports:
+      - "5001:5001"   
+    volumes:
+      - lms_employee_data:/app/instance
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os; print(os.path.exists('/app/instance/lms.db'))"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  lms-manager:
+    build:
+      context: ./leave-backend/manager_service
+      dockerfile: Dockerfile
+    container_name: lms-manager
+    restart: unless-stopped
+    ports:
+      - "5002:5002"   
+    volumes:
+      - lms_manager_data:/app/instance
+    depends_on:
+      - lms-employee
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os; print(os.path.exists('/app/instance/manager.db'))"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  lms-gateway:
+    build:
+      context: ./leave-backend/gateway
+      dockerfile: Dockerfile
+    container_name: lms-gateway
+    restart: unless-stopped
+    environment:
+      EMPLOYEE_URL: http://lms-employee:5001
+      MANAGER_URL:  http://lms-manager:5002
+    ports:
+      - "8000:8000"
+    depends_on:
+      - lms-employee
+      - lms-manager
+
+  lms-frontend:
+    build:
+      context: ./leave-frontend
+      dockerfile: Dockerfile
+    container_name: lms-frontend
+    restart: unless-stopped
+    ports:
+      - "8081:80"   
+    depends_on:
+      - lms-gateway
+
+volumes:
+  lms_employee_data:
+  lms_manager_data:

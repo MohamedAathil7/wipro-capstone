@@ -1,0 +1,143 @@
+<div class="main-wrapper d-flex flex-column min-vh-100">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark gradient-bg shadow-sm" style="padding: 13px;">
+    <div class="container-fluid">
+
+      <span class="navbar-text me-3 text-white" (click)="setView('dashboard')" style="font-size: 20px; color: gold;">
+        {{ greeting }} {{ username }}
+      </span>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav" style="margin-bottom: 2px; margin-left: 700px; font-size: 18px;">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><button class="btn nav-link" (click)="setView('dashboard')"> Home</button></li>
+          <li class="nav-item"><button class="btn nav-link" (click)="setView('apply')"> Apply for Leave</button></li>
+          <li class="nav-item"><button class="btn nav-link" (click)="setView('myLeaves')">  Pending & History</button></li>
+          <!-- Removed Balances navbar button -->
+        </ul>
+
+        <!-- Updated logout button: no modal, direct click -->
+        <button class="btn btn-light btn-sm px-3" (click)="confirmLogout()" style="background-color: #252525; color: gold; border: solid 1px gold;"> Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTAINER BODY -->
+  <div class="container my-4" style="padding-bottom: 100px;">
+
+    <!-- Dashboard View with Employee Info and Balances -->
+    <div *ngIf="currentView === 'dashboard'" class="dashboard-card p-5 text-center">
+      <h2 class="fw-bold mb-3" style="font-size: 50px;"> {{ username }}'s Portal</h2>
+      <div class="bg-gray-900 text-white rounded p-4 mb-4" style="font-size: 20px;">
+        <h1 class="text-3xl font-bold text-yellow-500 mb-4 text-center">About {{ username }}!</h1>
+        <p class="text-gray-300 text-lg leading-relaxed mb-4">
+          The {{ username }} plays a vital role in overseeing team performance and ensuring smooth operations within the organization. 
+          In our Employee Leave Management System, the Employee is responsible for applying leave requests to Managers. This ensures a balanced workflow and proper staffing at all times.
+        </p>
+   
+      </div>
+
+      <!-- Leave Balances Section embedded in Dashboard -->
+    <!-- Leave Balances Section embedded in Dashboard -->
+<div class="d-flex justify-content-center gap-4">
+  <div class="balance-card bg-success text-white p-4 rounded" style="min-width: 160px;">
+    <h4>{{ balance.sick }}</h4>
+    <p>Sick/Casual Leaves</p>
+  </div>
+  <div class="balance-card bg-info text-white p-4 rounded" style="min-width: 160px;">
+    <h4>{{ balance.medical }}</h4>
+    <p>Medical Leaves</p>
+  </div>
+  <div class="balance-card bg-primary text-white p-4 rounded" style="min-width: 160px;">
+    <h4>{{ balance.privileged }}</h4>
+    <p>Privilege Leaves</p>
+  </div>
+</div>
+
+    </div>
+
+    <!-- Apply Leave View -->
+<div *ngIf="currentView === 'apply'" class="card shadow-lg p-4 mb-4 animate-fade d-flex flex-column align-items-center">
+  <h3 class="fw-bold text-primary text-center mb-4">Apply for Leave</h3>
+  <form class="w-100" style="max-width: 400px;">
+    <div class="mb-3">
+      <label class="form-label">Start Date</label>
+      <input [(ngModel)]="newLeave.start_date" (change)="calculateNumberOfDays()" name="start_date" type="date" class="form-control" style="background-color: #676D73;color: white"/>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">End Date</label>
+      <input [(ngModel)]="newLeave.end_date" (change)="calculateNumberOfDays()" name="end_date" type="date" class="form-control" style="background-color: #676D73;color: white"/>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Number of Days</label>
+      <input [value]="numberOfDays" readonly class="form-control" style="background-color: #676D73;color: white"/>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Type of leaves</label>
+      <select [(ngModel)]="newLeave.reason" name="reason" class="form-select" style="background-color: #676D73; color: white;">
+         <option value="" disabled selected>Select type of leave</option>
+        <option value="sick">Sick/Casual Leave</option>
+        <option value="Medical Emergency">Medical Leave</option>
+        <option value="privileged leave">Privileged Leave</option>
+      </select>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="button" class="btn btn-primary px-4" (click)="applyLeave()">Send to Manager</button>
+    </div>
+  </form>
+</div>
+
+
+    <!-- My Leaves View -->
+    <div *ngIf="currentView === 'myLeaves'" class="card shadow-lg p-4 mb-4 animate-fade">
+      <h3 class="fw-bold text-info">Pending and History</h3>
+      <div class="table-responsive mt-3 ">
+          <div class="mb-3">
+  </div>
+        <table class="table table-hover align-middle">
+          <thead class="table-dark">
+            <tr><th>Dates</th><th>Type of leave</th><th>Number of Days</th><th>Status</th><th>Remark</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let l of leaves">
+              <td><i class="bi bi-calendar-event"></i> {{ l.start_date }} → {{ l.end_date }}</td>
+              <td>{{ l.reason }}<br><small class="text-muted"></small></td><td>{{ calculateDays(l.start_date, l.end_date) }}</td>
+
+              <td>
+                <span class="badge bg-warning text-dark" *ngIf="l.status === 'Pending'">Pending</span>
+                <span class="badge bg-success" *ngIf="l.status === 'Approved'">Approved</span>
+                <span class="badge bg-danger" *ngIf="l.status === 'Rejected'">Rejected</span>
+              </td>
+              <td>{{ l.remarks || 'Done' }}</td>
+              <td>
+                <button *ngIf="l.status === 'Pending'" class="btn btn-danger btn-sm" (click)="deleteLeave(l.id)">
+                  <i class="bi bi-trash"></i> Cancel
+                </button>
+                <span *ngIf="l.status !== 'Pending'">-</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+    <div class="toast align-items-center border-0" [class.show]="toastMessage" [class.fade]="true" style="background-color: gold; color: black;">
+      <div class="d-flex">
+        <div class="toast-body">{{ toastMessage }}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="toastMessage = ''"></button>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- End of main-wrapper -->

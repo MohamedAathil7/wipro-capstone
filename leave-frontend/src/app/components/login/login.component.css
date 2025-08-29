@@ -1,0 +1,58 @@
+/* Background with image */
+.login-wrapper {
+  background: url("/assets/image1.png") no-repeat center center fixed;
+  background-size: cover;
+  transition: background 0.5s ease-in-out;
+  padding: 20px;
+}
+
+/* Semi-transparent Card */
+.login-card {
+  max-width: 380px;
+  width: 100%;
+  border-radius: 1rem;
+  background-color: rgba(40, 40, 40, 0.92); /* Dark grey glass effect */
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+  color: #f1c40f; /* golden text */
+  box-shadow: 0 0 25px rgba(241, 196, 15, 0.3);
+}
+
+/* Golden text helper */
+.text-gold {
+  color: #f1c40f !important;
+}
+
+/* Input fields */
+input.form-control {
+  border-radius: 0.5rem;
+  background-color: rgba(60, 60, 60, 0.95);
+  border: 1px solid #777;
+  color: #fff;
+}
+input.form-control::placeholder {
+  color: #bbb;
+}
+
+/* Golden button */
+.btn-gold {
+  background-color: #f1c40f;
+  border: none;
+  color: #1c1c1c;
+}
+.btn-gold:hover {
+  background-color: #d4ac0d;
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+
+/* Responsive for mobile */
+@media (max-width: 576px) {
+  .login-card {
+    padding: 1.5rem 1rem;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+}

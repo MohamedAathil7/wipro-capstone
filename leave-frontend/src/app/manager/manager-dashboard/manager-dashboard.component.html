@@ -1,0 +1,173 @@
+<nav class="navbar navbar-expand-lg navbar-dark gradient-bg shadow-sm flex align-items-center" >
+  <div class="container-fluid">
+      <span class="navbar-text me-3 text-white" (click)="setView('dashboard')" style="font-size: 20px;">
+         Good {{ greeting }} <strong>Manager</strong>
+      </span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMenu" style="margin-top: 10px; margin-left: 450px ;">
+      <ul class="navbar-nav me-auto mb-2" style="font-size: 18px;">
+        <li class="nav-item"><button class="btn btn-link nav-link" (click)="setView('dashboard')" style="text-decoration: none;">Home</button></li>
+          <li class="nav-item"><button class="btn btn-link nav-link" (click)="setView('create-employee')" style="text-decoration: none;">Add Employee</button></li>
+        <li class="nav-item"><button class="btn btn-link nav-link" (click)="setView('approvals')" style="text-decoration: none;">Pending Requests</button></li>
+        <li class="nav-item"><button class="btn btn-link nav-link" (click)="setView('all-leaves')" style="text-decoration: none;">History</button></li>
+        <li class="nav-item"><button class="btn btn-link nav-link" (click)="setView('balances')" style="text-decoration: none;">Balance left</button></li>
+      </ul>
+
+      <button class="btn btn-outline-light btn-sm" (click)="logout()" style="margin-bottom: 10px;">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Toast + Error messages -->
+<div *ngIf="toastMessage" class="alert alert-success alert-dismissible fade show m-3">
+  {{ toastMessage }} <button type="button" class="btn-close" (click)="toastMessage = ''"></button>
+</div>
+<div *ngIf="error" class="alert alert-danger alert-dismissible fade show m-3">
+  {{ error }} <button type="button" class="btn-close" (click)="error = ''"></button>
+</div>
+
+<div class="container my-4">
+  <!-- Dashboard -->
+      <div *ngIf="currentView === 'dashboard'" class="dashboard-card p-5 text-center">
+      <h2 class="fw-bold mb-3" style="font-size: 50px;">Manager's Portal</h2>
+      <div class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-6">
+  <div class="max-w-3xl bg-gray-800 rounded-xl shadow-lg p-8" style="font-size: 20px;">
+    <h1 class="text-3xl font-bold text-yellow-500 mb-4 text-center">About the Manager</h1>
+    <p class="text-gray-300 text-lg leading-relaxed mb-4">
+      The Manager plays a vital role in overseeing team performance and ensuring smooth operations within the organization. 
+      In our Employee Leave Management System, the Manager is responsible for reviewing and approving leave requests submitted 
+      by employees. This ensures a balanced workflow and proper staffing at all times.
+    </p>
+
+    <ul class="list-disc list-inside text-gray-300 text-base mb-4" style="list-style: none;">
+      <li>Review pending leave requests and take timely action</li>
+      <li>Ensure fair and transparent approval process</li>
+      <li>Maintain proper workforce balance</li>
+      <li>Provide feedback to employees on their requests</li>
+    </ul>
+    <p class="text-gray-400 italic text-center">
+      “A good manager creates clarity, builds trust, and empowers teams to achieve their goals.”
+    </p>
+  </div>
+</div>
+</div>
+
+  <!-- Pending Approvals -->
+  <div *ngIf="currentView === 'approvals'" class="card p-4 mb-4 shadow-sm rounded-4">
+    <h3 class="text-gradient">Pending Requests</h3>
+    <div class="table-responsive">
+      <table class="table align-middle text-center">
+        <thead>
+          <tr>
+            <th>Employee</th><th>Dates</th><th>Reason</th>
+            <th>Status</th><th>Remark</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of leaves">
+            <td>{{l.employee_name}}</td>
+            <td>{{l.start_date}} to {{l.end_date}}</td><td>{{l.reason}}</td>
+            <td>
+              <span class="status-approved" *ngIf="l.status === 'Approved'">
+                <i class="bi bi-check-circle-fill me-1"></i>{{l.status}}
+              </span>
+              <span class="status-rejected" *ngIf="l.status === 'Rejected'">
+                {{l.status}}
+              </span>
+              <span class="badge bg-warning text-dark" *ngIf="l.status === 'Pending'">{{l.status}}</span>
+            </td>
+            <td><input [(ngModel)]="l.remarks" class="form-control form-control-sm shadow-sm" placeholder="Enter remark" style="background-color:transparent;"/></td>
+            <td>
+              <button class="btn btn-success btn-sm me-2" *ngIf="l.status === 'Pending'" (click)="approve(l)">Approve</button>
+              <button class="btn btn-danger btn-sm me-2" *ngIf="l.status === 'Pending'" (click)="reject(l)">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- All Leaves -->
+  <div *ngIf="currentView === 'all-leaves'" class="card p-4 mb-4 shadow-sm rounded-4">
+    <h3 class="text-gradient">History</h3>
+    <div class="table-responsive">
+      <table class="table align-middle text-center">
+        <thead>
+          <tr><th>Employee</th><th>Dates</th><th>Reason</th><th>Status</th><th>Remark</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of allLeaves">
+            <td>{{l.employee_name}}</td>
+            <td>{{l.start_date}} to {{l.end_date}}</td><td>{{l.reason}}</td>
+            <td>
+              <span class="status-approved" *ngIf="l.status === 'Approved'">{{l.status}}</span>
+              <span class="status-rejected" *ngIf="l.status === 'Rejected'">{{l.status}}</span>
+              <span class="badge bg-warning text-dark" *ngIf="l.status === 'Pending'"></span>
+            </td>
+            <td>{{l.remarks}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Leave Balances -->
+  <div *ngIf="currentView === 'balances'" class="card p-4 mb-4 shadow-sm rounded-4">
+    <h3 class="text-gradient">Employee Leave Balances</h3>
+    <div class="table-responsive">
+      <table class="table align-middle text-center">
+        <thead><tr><th>Employee</th><th>Sick/Casual</th><th>Medical</th><th>Privileged</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let e of employeeBalances">
+            <td>{{e.username}}</td><td>{{e.sick}}</td><td>{{e.medical}}</td><td>{{e.privileged}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Pending Employees -->
+<div *ngIf="currentView === 'employees'" 
+     class="card p-4 mb-4 shadow-sm rounded-4" 
+     style="width: 500px; opacity: 0; position: absolute;">
+  <h3 class="text-gradient"></h3>
+  <ul class="list-group shadow-sm">
+    <li class="list-group-item d-flex justify-content-between align-items-center" 
+        *ngFor="let emp of pendingEmployees">
+      {{ emp.username }}
+      <button class="btn btn-success btn-sm" (click)="approveEmployee(emp.id)">Created</button>
+    </li>
+  </ul>
+</div>
+
+
+  <!-- Create Employee -->
+  <div *ngIf="currentView === 'create-employee'" class="card p-4 mb-4 shadow-sm rounded-4" style="width: 400px; margin-top: 150px; margin-left: 200px;  position: relative;
+  color: #f1c40f;
+  z-index: 1;                       
+  padding: 30px 40px;
+  border-radius: 20px;
+  overflow: hidden;                  
+">
+    <h3 class="text-gradient">Create Employee</h3>
+    <form (ngSubmit)="createEmployee()" #empForm="ngForm">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input [(ngModel)]="newEmployee.username" name="username" class="form-control" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input [(ngModel)]="newEmployee.password" name="password" type="password" class="form-control" required />
+      </div>
+        <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input name="email" class="form-control" />
+      </div>
+      <button type="submit" class="btn" style="opacity: 1;margin-left: 125px; background-color:#E3B80F; color: black;" [disabled]="empForm.invalid">Create</button>
+    </form>
+  </div>
+</div>
+
+

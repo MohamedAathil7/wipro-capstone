@@ -1,0 +1,281 @@
+/* Global */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #2e2e2e;
+  margin: 0;
+  padding: 0;
+  color: #f1c40f; /* golden yellow */
+}
+
+/* Navbar */
+.navbar.gradient-bg {
+  background-color: transparent;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+  
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #f1c40f !important;
+}
+
+.nav-link, .navbar-text {
+  color: #f1c40f !important;
+  font-weight: 600;
+}
+
+.nav-link.btn-link {
+  color: #f9d94c;
+  transition: color 0.3s ease;
+}
+
+.nav-link.btn-link:hover {
+  color: #f1c40f;
+  text-decoration: underline;
+}
+
+.btn-outline-light.btn-sm {
+  border-color: #f1c40f;
+  color: #f1c40f;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-light.btn-sm:hover {
+  background-color: #f1c40f;
+  color: #222222;
+}
+
+/* Toast and Alerts */
+.alert {
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgb(241 196 15 / 0.3);
+}
+
+.alert-success {
+  background-color: #4d491a;
+  color: #f9e79f;
+}
+
+.alert-danger {
+  background-color: #662222;
+  color: #f39c9c;
+}
+
+/* Container & Cards */
+.container.my-4 {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: #f1c40f;
+}
+
+.card {
+    background-color: transparent;
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
+  border-radius: 16px;
+
+  padding: 30px 40px;
+  margin-bottom: 2.5rem;
+  border: none;
+  color: #f1c40f;
+}
+
+h2.text-gradient, h3.text-gradient {
+  background: linear-gradient(45deg, #f1c40f, #d4ac0d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+/* Buttons */
+.btn-gradient {
+  background: linear-gradient(45deg, #f1c40f, #d4ac0d);
+  color: #222222;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 14px 28px;
+  box-shadow: 0 6px 15px rgba(212, 172, 13, 0.4);
+  transition: 0.3s ease;
+}
+
+.btn-gradient:hover {
+  opacity: 0.85;
+  box-shadow: 0 8px 20px rgba(212, 172, 13, 0.6);
+}
+
+/* Table Styling */
+.table-responsive {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.2);
+}
+
+.table {
+  border-collapse: separate !important;
+  border-spacing: 0 12px !important;
+}
+
+.table th {
+  background: #615c19;
+  font-weight: 700;
+  color: #f9e79f;
+  border-bottom: none !important;
+  padding: 14px 12px !important;
+}
+
+.table td {
+  background: #4b4625;
+  border-bottom: none !important;
+  padding: 14px 12px !important;
+  vertical-align: middle !important;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgb(241 196 15 / 0.15);
+  color: #f1c40f;
+}
+
+.table tbody tr:hover td {
+  background-color: #665f1c;
+  box-shadow: 0 5px 15px rgba(212, 172, 13, 0.3);
+  color: #fff7d1;
+}
+
+/* Status Labels */
+.status-approved {
+  background: #27ae60;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-weight: 600;
+  box-shadow: 0 0 6px #27ae6099;
+  display: inline-block;
+}
+
+.status-rejected {
+  background: #e74c3c;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-weight: 600;
+  box-shadow: 0 0 6px #e74c3c99;
+  display: inline-block;
+}
+
+.badge.bg-warning {
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 16px;
+  background-color: #f1c40f;
+  color: #222;
+}
+
+/* Input Remarks */
+input.form-control-sm {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(241, 196, 15, 0.3);
+  transition: box-shadow 0.3s ease;
+  background-color: #4b4625;
+  border: 1px solid #d4ac0d;
+  color: #f1c40f;
+}
+
+input.form-control-sm:focus {
+  box-shadow: 0 2px 12px #d4ac0d;
+  border-color: #d4ac0d;
+  outline: none;
+  background-color: #665f1c;
+}
+
+/* List of Pending Employees */
+.list-group {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.2);
+}
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #f9e79f8a;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #f1c40f;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.btn-success.btn-sm {
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(241, 196, 15, 0.4);
+  transition: background-color 0.3s ease;
+  background-color: #f1c40f;
+  color: #222222;
+  border: none;
+}
+
+.btn-success.btn-sm:hover {
+  background-color: #d4ac0dcc;
+  color: #222;
+}
+
+
+
+/* Welcome message & titles */
+.welcome-message {
+  font-size: 1.15rem;
+  color: #d4ac0d;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.dashboard-title {
+  color: #f1c40f;
+  font-weight: 900;
+  margin-bottom: 25px;
+  font-size: 1.9rem;
+}
+
+/* Updated Blue Buttons to gold */
+.btn-blue {
+  background: #f1c40f;
+  border: none;
+  color: #222222;
+  padding: 14px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(241, 196, 15, 0.4);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+}
+
+.btn-blue:hover {
+  background: #d4ac0d;
+  box-shadow: 0 6px 25px rgba(212, 172, 13, 0.6);
+}
+
+/* Toast */
+.toast {
+  transition: all 0.5s ease-in-out;
+  transform: translateY(-20px);
+  opacity: 0;
+  color: #f1c40f;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+.navbar .nav-link:hover,
+.navbar .btn.nav-link:hover {
+  background: rgba(241, 196, 15, 0.15);
+  transform: translateY(-2px);
+  color: #fff !important;
+}

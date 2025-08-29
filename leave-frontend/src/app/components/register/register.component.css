@@ -1,0 +1,33 @@
+.register-wrapper {
+  background: url('https://images.unsplash.com/photo-1581091012184-3d05b27d4e7e?auto=format&fit=crop&w=1080&q=80') no-repeat center center;
+  background-size: cover;
+  transition: background 0.5s ease-in-out;
+}
+
+.register-card {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+input.form-control {
+  border-radius: 0.5rem;
+}
+
+.btn.hover-scale:hover {
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+
+@media (max-width: 576px) {
+  .register-card {
+    padding: 1.5rem 1rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+}

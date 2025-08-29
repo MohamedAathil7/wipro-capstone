@@ -1,0 +1,25 @@
+<div class="login-wrapper d-flex align-items-center justify-content-center min-vh-100" style="background-color: transparent;">
+  <div class="card shadow-lg login-card text-center position-relative p-4 pt-5" style="background-color: transparent;">
+
+
+
+    <h3 class="fw-bold text-gold mb-2 mt-3" style="font-size: 30px;">Login</h3>
+    <p></p>
+    <form class="d-grid gap-3">
+      <div>
+        <label for="username" class="form-label fw-semibold small text-gold" style="font-size: 20px;">Username</label>
+        <input [(ngModel)]="username" name="username" id="username" class="form-control shadow-sm" placeholder="Enter username">
+      </div>
+      <div>
+        <label for="password" class="form-label fw-semibold small text-gold" style="font-size: 20px;">Password</label>
+        <input [(ngModel)]="password" type="password" name="password" id="password" class="form-control shadow-sm" placeholder="Enter password">
+      </div>
+      <button type="button" class="btn btn-gold fw-bold shadow hover-scale" (click)="login()">
+         Login
+      </button>
+    </form>
+
+    <p *ngIf="error" class="text-white mt-2" style="font-size: 20px;">Incorrect Username / password </p>
+
+  </div>
+</div>
